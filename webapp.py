@@ -6,6 +6,7 @@ import argparse
 import io
 import os
 from PIL import Image
+from pathlib import Path
 
 import torch
 from flask import Flask, render_template, request, redirect
@@ -37,7 +38,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Flask app exposing yolov5 models")
     parser.add_argument("--port", default=5000, type=int, help="port number")
     args = parser.parse_args()
-
-    model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)  # force_reload = recache latest code
+    
+    model_path = Path("C:\\Users\\muhdi\\OneDrive\\Documents\\wk8.pt")
+    model = torch.hub.load("ultralytics/yolov5:master", "custom", path = model_path)  # force_reload = recache latest code
     model.eval()
     app.run(host="0.0.0.0", port=args.port)  # debug=True causes Restarting with stat
