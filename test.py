@@ -26,6 +26,8 @@ def upload_file():
         
         # Run inference
         results = model(img, size=640)
+        results.print()
+        results.save()
         
         # Return inference results
         return jsonify(results.pandas().xyxy[0].to_dict(orient='records'))
