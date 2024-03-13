@@ -1,14 +1,15 @@
 import io
 import torch
+import os 
 from PIL import Image
-
+from pathlib import Path
 # Model
-model = torch.hub.load("ultralytics/yolov5", "yolov5s", pretrained=True, force_reload=True)
+model_path = Path("C:\\Users\\muhdi\\OneDrive\\Documents\\wk8.pt")
+model = torch.hub.load("ultralytics/yolov5:master", "custom", path = model_path)
 
-# img = Image.open("zidane.jpg")  # PIL image direct open
-
+img = Image.open("20240313_163902.jpg")  # PIL image direct open
 # Read from bytes as we do in app
-with open("zidane.jpg", "rb") as file:
+with open("20240313_163902.jpg", "rb") as file:
     img_bytes = file.read()
 img = Image.open(io.BytesIO(img_bytes))
 
