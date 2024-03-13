@@ -19,5 +19,10 @@ with open(image_path, "rb") as file:
 img = Image.open(io.BytesIO(img_bytes))
 
 results = model(img, size=640)  # includes NMS
-
+results.print()
+results.save()
 print(results.pandas().xyxy[0])
+image_id = results.pandas().xyxy[0].iloc[0]['name']
+print("Image ID: ", image_id)
+
+
